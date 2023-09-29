@@ -43,7 +43,11 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "container",
       filename: "remoteEntry.js",
-      remotes: {},
+      // Get the counter component from the counter app, in this format:
+      // { "app-name": "name@<remote-host>/remoteEntry.js" }
+      remotes: {
+        counter: "counter@http://localhost:8081/remoteEntry.js",
+      },
       exposes: {},
       shared: {
         ...deps,
